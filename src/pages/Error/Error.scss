@@ -1,0 +1,43 @@
+.error {
+    position: relative;
+    background-color: #12002b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw; 
+    height: 100vh;
+    &__container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        &__404 {
+            color: white;
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+            font-size: 120px;
+
+            &__ComeBackHomeButton {
+                border-color: #00bc77;
+                background-color: #00bc77;
+                padding: 10px 20px; 
+                margin: 20px; 
+                margin-top: 5vh;
+            }
+            
+            &__ComeBackHomeButtonLink {
+                text-decoration: none;
+                color: white;
+                font-family: Avenir, Helvetica, Arial, sans-serif;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
+
+
+
