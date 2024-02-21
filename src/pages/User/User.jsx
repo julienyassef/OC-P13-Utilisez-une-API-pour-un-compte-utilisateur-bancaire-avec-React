@@ -41,11 +41,11 @@ function User() {
    const navigate = useNavigate();
  
    // Rediriger vers la page d'accueil si aucun token n'est présent
-   useEffect(() => {
-     if (!token) {
-       navigate('/');
-     }
-   }, [token, navigate]);
+  //  useEffect(() => {
+  //    if (!token) {
+  //      navigate('/');
+  //    }
+  //  }, [token, navigate]);
 
   return (
     <div className="userContainer bg-dark">

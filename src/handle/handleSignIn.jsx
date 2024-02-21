@@ -29,7 +29,7 @@ export const handleSignIn = async (username, password, dispatch) => {
           // console.log('Token obtenu:', token);
 
           dispatch(setAuthToken(token));
-
+         
           // Récupérer les autres informations de l'utilisateur avec le token
           const userData = await fetchUserData(token);
           // console.log('Informations utilisateur:', userData);
@@ -40,6 +40,7 @@ export const handleSignIn = async (username, password, dispatch) => {
 
           // Dispatch une action pour mettre à jour le state avec les informations de l'utilisateur
           dispatch(signinSuccess({ ...userData, userId }));
+          
 
           return true; // Connexion réussie
         } else {
