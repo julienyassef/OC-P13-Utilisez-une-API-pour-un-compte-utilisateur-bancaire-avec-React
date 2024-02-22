@@ -16,7 +16,7 @@ function ModalSignIn() {
     const dispatch = useDispatch(); // Permet de dispatcher des actions vers le store Redux.
     const navigate = useNavigate(); // Permet de gérer la navigation entre les pages.
 
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
@@ -25,7 +25,7 @@ function ModalSignIn() {
       e.preventDefault();
   
       try {
-        const isAuthenticated = await handleSignIn(username, password, dispatch);
+        const isAuthenticated = await handleSignIn(email, password, dispatch);
   
         if (isAuthenticated) {
           console.log('Authentification réussie');
@@ -50,8 +50,8 @@ function ModalSignIn() {
             <input
               type="text"
               id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="signIn-content__inputWrapper">
