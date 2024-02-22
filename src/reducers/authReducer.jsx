@@ -36,13 +36,13 @@ const  authReducer = (state = initialState, action) => {
         }
       };
     case 'SET_AUTH_TOKEN':
-      // console.log('New state after setting auth token:', {
-      //   ...state,
-      //   auth: {
-      //     ...state.auth,
-      //     token: action.payload
-      //   }
-      // });
+      console.log('New state after setting auth token:', {
+        ...state,
+        auth: {
+          ...state.auth,
+          token: action.payload
+        }
+      });
       return {
         ...state,
         auth: {

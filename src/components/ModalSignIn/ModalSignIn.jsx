@@ -28,7 +28,7 @@ function ModalSignIn() {
         const isAuthenticated = await handleSignIn(username, password, dispatch);
   
         if (isAuthenticated) {
-          // console.log('Authentification réussie');
+          console.log('Authentification réussie');
           navigate('/user');
         } else {
           console.log('Authentification échouée');

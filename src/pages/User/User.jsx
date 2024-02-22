@@ -35,9 +35,12 @@ function User() {
    // Récupérer le token à partir du store Redux
    const token = useSelector(state => state.auth.token);
    console.log('Token from Redux state:', token);
+
+   const fisrtname = useSelector(state => state.auth.firstname);
+   console.log('fisrtname from Redux state:', fisrtname);
   
 
-   // Utiliser le hook useHistory pour gérer la redirection
+
    const navigate = useNavigate();
  
    // Rediriger vers la page d'accueil si aucun token n'est présent

@@ -24,7 +24,7 @@ export const fetchUserData = async (token) => {
   
   
   // Fonction pour générer un identifiant pour l'utilisateur 
- export function generateUserId(firstName, lastName, token) {
+ export function generateUserId(firstName, lastName) {
     // Extraire la première lettre du prénom et du nom
     const userId = `${firstName.substring(0, 1)}${lastName.substring(0, 1)}`;
 
