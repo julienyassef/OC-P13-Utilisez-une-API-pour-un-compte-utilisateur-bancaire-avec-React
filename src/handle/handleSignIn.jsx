@@ -6,12 +6,10 @@ export const handleSignIn = async (username, password, dispatch) => {
   try {
     // Appel à la fonction de login du ApiService
     const loginResponse = await login(username, password);
+    
 
-    if (loginResponse.ok) {
-      // Vérifier si la requête est réussie
-      const jsonResponse = await loginResponse.json();
-
-      if (loginResponse.status === 200) {
+    if (loginResponse.status === 200) {
+        const jsonResponse = await loginResponse.json();
         // Si le statut est 200, la connexion a réussi
         if (jsonResponse.body.token) {
           // Si un token est présent dans la réponse
@@ -36,10 +34,7 @@ export const handleSignIn = async (username, password, dispatch) => {
         console.log('Statut de réponse non-200');
         return false; // Connexion échouée
       }
-    } else {
-      console.log('Échec de la requête');
-      return false; // Connexion échouée
-    }
+   
   } catch (error) {
     console.error('Erreur lors de la connexion :', error);
     return false; // Connexion échouée

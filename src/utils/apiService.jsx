@@ -1,6 +1,6 @@
 const BASE_URL = "http://localhost:3001/api/v1/user";
 
-export async function fetchData(endpoint) {
+const fetchData = async (endpoint) => {
   try {
     const response = await fetch(`${BASE_URL}${endpoint}`);
     if (!response.ok) {
@@ -13,7 +13,7 @@ export async function fetchData(endpoint) {
   }
 }
 
-export async function login(email, password) {
+const login = async (email, password) => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -27,7 +27,7 @@ export async function login(email, password) {
   }
 }
 
-export async function getUserProfile(token) {
+const getUserProfile = async (token) => {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -43,19 +43,5 @@ export async function getUserProfile(token) {
   }
 }
 
-export async function updateUserProfile(token, firstName, lastName) {
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify({ firstName, lastName }),
-  };
 
-  try {
-    return await fetchData('/profile', requestOptions);
-  } catch (error) {
-    throw new Error(error);
-  }
-}
+export { fetchData, login, getUserProfile };
