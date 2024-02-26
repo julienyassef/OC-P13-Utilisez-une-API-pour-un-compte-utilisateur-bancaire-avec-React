@@ -2,13 +2,17 @@
 import './ModalSignIn.scss';
 
 // React & Redux
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 //Import
 import { handleSignIn } from '../../handle/handleSignIn';
+import { selectUserError, selectUserId } from '../../store/selectors/userSelectors';
 
+    
+
+    
 
 
 function ModalSignIn() {
@@ -19,19 +23,19 @@ function ModalSignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
+    
+    const userId = useSelector(selectUserId);
+    const userLoginError = useSelector(selectUserError)
 
     
-
-    // Fonction appelée lors de la soumission du formulaire.
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
+    
       try {
-        const isAuthenticated = await handleSignIn(email, password, dispatch);
-  
+        const isAuthenticated = await handleSignIn(email, password, rememberMe, dispatch);
+    
         if (isAuthenticated) {
           console.log('Authentification réussie');
-          navigate('/user');
         } else {
           console.log('Authentification échouée');
         }
@@ -39,6 +43,11 @@ function ModalSignIn() {
         console.error('Erreur lors de la soumission du formulaire :', error);
       }
     };
+
+    useEffect(() => {
+        if (userId === null) navigate('/SignIn');
+        else if (userLoginError === null) navigate(`/user/${userId}`);
+    }, [userId, userLoginError, navigate]);
 
    
   return (
