@@ -58,7 +58,7 @@ function User() {
 
   return (
     <div className="userContainer bg-dark">
-      <UserHeader/>
+      <UserHeader fisrtName={fisrtName} lastName={lastName}/>
       <AccountList  accounts={accounts}/>
     </div>
   )
