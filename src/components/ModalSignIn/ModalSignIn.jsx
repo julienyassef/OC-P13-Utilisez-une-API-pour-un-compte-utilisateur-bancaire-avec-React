@@ -20,6 +20,8 @@ function ModalSignIn() {
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
 
+    
+
     // Fonction appelée lors de la soumission du formulaire.
     const handleSubmit = async (e) => {
       e.preventDefault();

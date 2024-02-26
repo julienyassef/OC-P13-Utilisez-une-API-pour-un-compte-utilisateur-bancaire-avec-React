@@ -1,5 +1,4 @@
 import { setAuthToken, signinSuccess } from '../action/authActions';
-import { generateUserId } from '../utils/authUtils';
 import { login, getUserProfile } from '../utils/apiService';
 
 export const handleSignIn = async (username, password, dispatch) => {
