@@ -9,8 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //COMPONENTS 
 import UserHeader from '../../components/UserHeader/UserHeader';
 import AccountList from '../../components/AccountList/AccountList';
-import { selectUserFirstName, selectUserId, selectUserLastName, selectUserToken } from '../../store/selectors/userSelectors';
-
+import { selectUserIsConnected, selectUserToken } from '../../store/selectors/userSelectors';
 
 
 
@@ -35,20 +34,15 @@ const accounts = [
 
 function User() {
 
-
-   // Récupérer les states à partir du store Redux
-   const token = useSelector(selectUserToken)
-   const id = useSelector(selectUserId);
-
-
+   const isConnected = useSelector(selectUserIsConnected); 
    const navigate = useNavigate();
  
    // Rediriger vers la page d'accueil si aucun token n'est présent
    useEffect(() => {
-     if (!token) {
+     if (!isConnected) { 
        navigate('/');
      }
-   }, [token, navigate]);
+   }, [isConnected, navigate]);
 
   return (
     <div className="userContainer bg-dark">
