@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import AccountList from '../../components/AccountList/AccountList';
 
+import store  from '../../app/store';
+
 //DATA 
 const accounts = [
   {
@@ -33,22 +35,24 @@ function User() {
   // si pas de token dans redux, on redirige vers la home
 
    // Récupérer le token à partir du store Redux
-   const token = useSelector(state => state.auth.token);
+   const token = useSelector(state => state.auth.token)
    console.log('Token from Redux state:', token);
 
-   const fisrtname = useSelector(state => state.auth.firstname);
-   console.log('fisrtname from Redux state:', fisrtname);
+  //  console.log(store.getState())
+
+   const fisrtName = useSelector(state => state.auth.firstName);
+   console.log('fisrtname from Redux state:', fisrtName);
   
 
 
    const navigate = useNavigate();
  
    // Rediriger vers la page d'accueil si aucun token n'est présent
-  //  useEffect(() => {
-  //    if (!token) {
-  //      navigate('/');
-  //    }
-  //  }, [token, navigate]);
+   useEffect(() => {
+     if (!token) {
+       navigate('/');
+     }
+   }, [token, navigate]);
 
   return (
     <div className="userContainer bg-dark">

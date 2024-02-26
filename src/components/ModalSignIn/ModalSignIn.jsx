@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 //Import
-import { handleSignIn2 } from '../../handle/handleSignIn2';
+import { handleSignIn } from '../../handle/handleSignIn';
 
 
 
@@ -25,7 +25,7 @@ function ModalSignIn() {
       e.preventDefault();
   
       try {
-        const isAuthenticated = await handleSignIn2(email, password, dispatch);
+        const isAuthenticated = await handleSignIn(email, password, dispatch);
   
         if (isAuthenticated) {
           console.log('Authentification réussie');

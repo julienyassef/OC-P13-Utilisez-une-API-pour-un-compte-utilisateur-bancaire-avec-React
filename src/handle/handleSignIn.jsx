@@ -6,35 +6,28 @@ export const handleSignIn = async (username, password, dispatch) => {
   try {
     // Appel à la fonction de login du ApiService
     const loginResponse = await login(username, password);
-    
 
     if (loginResponse.status === 200) {
-        const jsonResponse = await loginResponse.json();
-        // Si le statut est 200, la connexion a réussi
-        if (jsonResponse.body.token) {
-          // Si un token est présent dans la réponse
-          const token = jsonResponse.body.token;
-          dispatch(setAuthToken(token));
+      const token = loginResponse.body.token;
+      
+      // Récupérer les informations utilisateur avec le token
+      const userData = await getUserProfile(token);
 
-          // Récupérer les informations utilisateur avec le token
-          const userData = await getUserProfile(token);
+      if (userData.status === 200) {
+        dispatch(setAuthToken(token));
 
-          // Création d'un identifiant pour l'utilisateur 
-          const userId = generateUserId(userData.firstName, userData.lastName);
+        // Dispatch une action pour mettre à jour le state avec les informations de l'utilisateur
+        dispatch(signinSuccess({ ...userData }));
 
-          // Dispatch une action pour mettre à jour le state avec les informations de l'utilisateur
-          dispatch(signinSuccess({ ...userData, userId }));
-
-          return true; // Connexion réussie
-        } else {
-          console.log('Aucun token dans la réponse');
-          return false; // Connexion échouée
-        }
+        return true
       } else {
-        console.log('Statut de réponse non-200');
-        return false; // Connexion échouée
+        console.log('token non valide')
+        return false;
       }
-   
+    } else {
+      console.log('Statut de réponse non-200');
+      return false; // Connexion échouée
+    }
   } catch (error) {
     console.error('Erreur lors de la connexion :', error);
     return false; // Connexion échouée

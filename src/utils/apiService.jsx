@@ -1,12 +1,12 @@
 const BASE_URL = "http://localhost:3001/api/v1/user";
 
-const fetchData = async (endpoint) => {
+const fetchData = async (endpoint, options) => {
   try {
-    const response = await fetch(`${BASE_URL}${endpoint}`);
+    const response = await fetch(`${BASE_URL}${endpoint}`, options);
     if (!response.ok) {
       throw new Error(`Request failed with status: ${response.status}`);
     }
-    return response.json();
+    return await response.json()
   } catch (error) {
     console.error('Error fetching data:', error);
     throw error; 
