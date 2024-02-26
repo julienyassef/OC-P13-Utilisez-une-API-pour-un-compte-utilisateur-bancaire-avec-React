@@ -1,4 +1,4 @@
-import { setAuthToken, signinSuccess } from '../action/authActions';
+import { setAuthToken, signinSuccess } from '../store/action/authActions';
 import { login, getUserProfile } from '../utils/apiService';
 
 export const handleSignIn = async (username, password, dispatch) => {

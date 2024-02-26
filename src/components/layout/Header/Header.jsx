@@ -7,7 +7,7 @@ import logo from '../../../assets/argentBankLogo.png'
 //React
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 //Import
 import {selectUserFirstName, selectUserId, selectUserIsConnected} from '../../../store/selectors/userSelectors'
@@ -18,8 +18,9 @@ function Header() {
   const isConnected = useSelector(selectUserIsConnected)
 
   const handleLogout = () => {
-    //lcréer la function
-  }
+    const dispatch = useDispatch();
+    dispatch(signOut()); 
+  };
 
 
   return (

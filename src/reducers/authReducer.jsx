@@ -18,26 +18,19 @@ const  authReducer = (state = initialState, action) => {
           lastName,
           error: null
       };
-    case 'LOGIN_FAILURE':
-      return {
-        ...state,
-          id: null,
-          firstName: null,
-          lastName: null,
-          token: null,
-          error: action.payload
-      };
     case 'SET_AUTH_TOKEN':
-      // console.log('New state after setting auth token:', {
-      //   ...state,
-      //   auth: {
-      //     ...state.auth,
-      //     token: action.payload
-      //   }
-      // });
       return {
         ...state,
           token: action.payload
+      };
+    case 'SIGN_OUT':
+      return {
+        ...state,
+        id: null,
+        firstName: null,
+        lastName: null,
+        token: null,
+        error: action.payload
       };
     default:
       return state;
