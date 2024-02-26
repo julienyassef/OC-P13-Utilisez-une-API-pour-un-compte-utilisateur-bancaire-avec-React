@@ -34,21 +34,12 @@ const accounts = [
 ];
 
 function User() {
-  // si pas de token dans redux, on redirige vers la home
 
-   // Récupérer le token à partir du store Redux
+
+   // Récupérer les states à partir du store Redux
    const token = useSelector(selectUserToken)
-  //  console.log('Token from Redux state:', token);
-
-   const fisrtName = useSelector(selectUserFirstName);
-  //  console.log('fisrtname from Redux state:', fisrtName);
-
-   const lastName = useSelector(selectUserLastName);
-  //  console.log('lastname from Redux state:', lastName);
-
    const id = useSelector(selectUserId);
-  //  console.log('id from Redux state:', id);
-  
+
 
    const navigate = useNavigate();
  

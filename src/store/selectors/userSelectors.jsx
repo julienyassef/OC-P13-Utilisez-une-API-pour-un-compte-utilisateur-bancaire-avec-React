@@ -24,3 +24,8 @@ export const selectUserError = createSelector(
   state => state.auth.error,
   error => error
 );
+
+export const selectUserIsConnected = createSelector(
+  state => !!state.auth.token, // Convertit la valeur de token en un booléen (true si le token existe, false sinon)
+  isConnected => isConnected
+);
