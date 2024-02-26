@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import AccountList from '../../components/AccountList/AccountList';
 
-import store  from '../../app/store';
 
 //DATA 
 const accounts = [
@@ -36,14 +35,17 @@ function User() {
 
    // Récupérer le token à partir du store Redux
    const token = useSelector(state => state.auth.token)
-   console.log('Token from Redux state:', token);
-
-  //  console.log(store.getState())
+  //  console.log('Token from Redux state:', token);
 
    const fisrtName = useSelector(state => state.auth.firstName);
-   console.log('fisrtname from Redux state:', fisrtName);
-  
+  //  console.log('fisrtname from Redux state:', fisrtName);
 
+   const lastName = useSelector(state => state.auth.lastName);
+  //  console.log('lastname from Redux state:', lastName);
+
+   const id = useSelector(state => state.auth.id);
+  //  console.log('id from Redux state:', id);
+  
 
    const navigate = useNavigate();
  
