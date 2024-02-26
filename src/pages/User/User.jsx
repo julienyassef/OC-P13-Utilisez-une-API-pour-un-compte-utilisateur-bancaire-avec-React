@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 //COMPONENTS 
 import UserHeader from '../../components/UserHeader/UserHeader';
 import AccountList from '../../components/AccountList/AccountList';
-import { selectUserIsConnected, selectUserToken } from '../../store/selectors/userSelectors';
+import { selectUserIsConnected, selectUserFirstName, selectUserLastName} from '../../store/selectors/userSelectors';
 
 
 
@@ -35,6 +35,8 @@ const accounts = [
 function User() {
 
    const isConnected = useSelector(selectUserIsConnected); 
+   const firstName = useSelector(selectUserFirstName)
+   const lastName = useSelector(selectUserLastName)
    const navigate = useNavigate();
  
    // Rediriger vers la page d'accueil si aucun token n'est présent
@@ -46,7 +48,7 @@ function User() {
 
   return (
     <div className="userContainer bg-dark">
-      <UserHeader/>
+      <UserHeader firstName={firstName} lastName={lastName}/>
       <AccountList  accounts={accounts}/>
     </div>
   )

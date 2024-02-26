@@ -1,18 +1,13 @@
 //CSS
 import './UserHeader.scss'
 
-//React & redux
-import { useSelector } from 'react-redux';
-import { selectUserFirstName, selectUserLastName } from '../../store/selectors/userSelectors'
 
-
-function UserHeader() {
-  const fisrtName = useSelector(selectUserFirstName);
-  const lastName = useSelector(selectUserLastName)
+function UserHeader( { firstName, lastName }) {
+  
 
   return (
     <div className="userHeader">
-    <h1>Welcome back<br />{fisrtName} {lastName}</h1>
+    <h1>Welcome back<br />{firstName} {lastName}</h1>
     <button className="userHeader__editButton">Edit Name</button>
   </div>
   )
