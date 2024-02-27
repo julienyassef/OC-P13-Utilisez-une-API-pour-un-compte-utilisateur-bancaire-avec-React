@@ -29,3 +29,8 @@ export const setAuthToken = (token) => ({
 export const signOut = () => ({
   type: 'SIGN_OUT',
 });
+
+export const setRememberMe = (rememberMe) => ({
+  type: 'SET_REMEMBER_ME',
+  payload: rememberMe,
+});
