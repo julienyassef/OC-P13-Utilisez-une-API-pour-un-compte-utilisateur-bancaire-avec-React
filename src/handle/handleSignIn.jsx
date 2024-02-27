@@ -1,4 +1,4 @@
-import { setAuthToken, signinSuccess } from '../store/action/authActions';
+import { setAuthToken, signinSuccess, setRememberMe } from '../store/action/authActions';
 import { login, getUserProfile } from '../utils/apiService';
 
 
@@ -9,12 +9,17 @@ export const handleSignIn = async (username, password, rememberMe, dispatch) => 
     const loginResponse = await login(username, password);
 
     if (loginResponse.status === 200) {
-      const token = loginResponse.body.token;
+
       
+      const token = loginResponse.body.token;
+   
       // Récupérer les informations utilisateur avec le token
       const userData = await getUserProfile(token);
 
       if (userData.status === 200) {
+
+        dispatch(setRememberMe(rememberMe));
+
         dispatch(setAuthToken(token));
 
         // Dispatch une action pour mettre à jour le state avec les informations de l'utilisateur
