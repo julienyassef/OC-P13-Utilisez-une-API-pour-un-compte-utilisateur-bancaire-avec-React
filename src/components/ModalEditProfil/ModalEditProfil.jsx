@@ -3,24 +3,23 @@ import './ModalEditProfil.scss'
 
 //REACT et Redux
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 //Import
-// import { updateUserProfile } from '../actions/userActions';
+import { updateUserProfile } from '../../store/action/authActions';
+
 
 
 const ModalEditProfile = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
-  const token = useSelector(state => state.auth.token);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // const userData = { firstName, lastName };
-    // dispatch(updateUserProfile(token, userData));
-    onClose(); // Ferme la modal après la soumission
+      dispatch(updateUserProfile(firstName, lastName));
+    onClose(); 
   };
 
  

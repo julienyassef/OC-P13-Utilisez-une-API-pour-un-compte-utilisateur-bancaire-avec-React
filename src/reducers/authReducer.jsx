@@ -39,6 +39,12 @@ const  authReducer = (state = initialState, action) => {
           ...state,
           rememberMe: action.payload,
         };
+        case 'UPDATE_USER_PROFILE':
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+      };
     default:
       return state;
   }
