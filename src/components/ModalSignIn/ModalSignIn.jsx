@@ -78,6 +78,7 @@ function ModalSignIn() {
             <input
               type="checkbox"
               id="remember-me"
+              onChange={(e) => setRememberMe(e.target.checked)}
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
