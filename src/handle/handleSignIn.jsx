@@ -3,6 +3,7 @@ import { login, getUserProfile } from '../utils/apiService';
 
 
 export const handleSignIn = async (username, password, rememberMe, dispatch) => {
+  // console.log('Valeur de Remember Me reçue dans handleSignIn :', rememberMe);
 
   try {
     // Appel à la fonction de login du ApiService

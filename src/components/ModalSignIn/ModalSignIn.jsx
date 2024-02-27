@@ -15,7 +15,7 @@ import { setRememberMe } from '../../store/action/authActions';
 function ModalSignIn() {
 
 
-
+                                
   
   const dispatch = useDispatch(); // Permet de dispatcher des actions vers le store Redux.
   const navigate = useNavigate(); // Permet de gérer la navigation entre les pages.
@@ -58,7 +58,6 @@ function ModalSignIn() {
   // }, [rememberMe]); 
   
 
-   
   return (
     <div>
       <section className="signIn-content">
