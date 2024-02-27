@@ -32,6 +32,11 @@ const  authReducer = (state = initialState, action) => {
         token: null,
         error: action.payload
       };
+      case 'SET_REMEMBER_ME':
+        return {
+          ...state,
+          rememberMe: action.payload,
+        };
     default:
       return state;
   }
