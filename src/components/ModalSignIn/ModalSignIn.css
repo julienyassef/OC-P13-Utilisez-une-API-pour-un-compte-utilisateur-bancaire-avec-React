@@ -1,0 +1,46 @@
+.signIn-content {
+  box-sizing: border-box;
+  background-color: white;
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 3rem;
+  padding: 2rem;
+}
+.signIn-content h1 {
+  margin-bottom: 20px;
+}
+.signIn-content__inputWrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.signIn-content__inputWrapper label {
+  font-weight: bold;
+}
+.signIn-content__inputWrapper input {
+  padding: 5px;
+  font-size: 1.2rem;
+}
+.signIn-content__inputRemeber {
+  display: flex;
+}
+.signIn-content__inputRemeber label {
+  margin-left: 0.25rem;
+}
+.signIn-content__buttonSignIn {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+}
+
+.sign-in-icon {
+  font-size: 5rem;
+  margin-bottom: 10px;
+}/*# sourceMappingURL=ModalSignIn.css.map */

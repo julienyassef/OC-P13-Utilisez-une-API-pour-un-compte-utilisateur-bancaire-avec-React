@@ -17,7 +17,7 @@ function UserHeader( { firstName, lastName }) {
 
   return (
     <div className="userHeader">
-      <h1>Welcome back<br />{firstName} {lastName}</h1>
+      <h1 className="userHeader__title">Welcome back<br />{firstName} {lastName}</h1>
       <button className="userHeader__editButton" onClick={openModal}>Edit Name</button>
       <ModalEditProfile isOpen={isModalOpen} onClose={closeModal} />
     </div>

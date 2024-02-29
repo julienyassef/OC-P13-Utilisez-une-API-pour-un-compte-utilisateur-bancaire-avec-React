@@ -1,0 +1,67 @@
+.ModalEditProfil {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: #12002b;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 400px;
+  box-sizing: border-box;
+}
+.ModalEditProfil__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+.ModalEditProfil__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.ModalEditProfil__header__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0;
+}
+.ModalEditProfil__header__close-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #ffffff;
+}
+.ModalEditProfil__header__close-button:hover {
+  color: #cccccc;
+}
+.ModalEditProfil__form {
+  display: flex;
+  flex-direction: column;
+}
+.ModalEditProfil__form__input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.ModalEditProfil__form__button-submit {
+  padding: 10px;
+  background-color: #00bc77;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+.ModalEditProfil__form__button-submit:hover {
+  background-color: #008c5b;
+}/*# sourceMappingURL=ModalEditProfil.css.map */

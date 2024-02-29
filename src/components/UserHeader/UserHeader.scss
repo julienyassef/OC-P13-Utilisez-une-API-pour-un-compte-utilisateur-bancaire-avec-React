@@ -2,6 +2,22 @@
     color: #fff;
     margin-bottom: 2rem;
 
+    &__title {
+        font-family: Avenir, Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        display: block;
+        font-size: 2em;
+        font-weight: bold;
+        color: #fff;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+
+
+    }
+
     &__editButton {
         border-color: #00bc77;
         background-color: #00bc77;
