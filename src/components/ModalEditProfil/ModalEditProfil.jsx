@@ -3,10 +3,13 @@ import './ModalEditProfil.scss'
 
 //REACT et Redux
 import React, { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 //Import
 import { updateUserProfile } from '../../store/action/authActions';
+import { putUserProfil } from '../../utils/apiService';
+import { selectUserToken } from '../../store/selectors/userSelectors';
+
 
 
 
@@ -15,10 +18,14 @@ const ModalEditProfile = ({ isOpen, onClose }) => {
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const token = useSelector(selectUserToken)
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async(e) => {
     e.preventDefault();
-      dispatch(updateUserProfile(firstName, lastName));
+
+      const response = await putUserProfil(firstName, lastName, token);
+      dispatch(updateUserProfile(response.body.firstName, response.body.lastName));
     onClose(); 
   };
 

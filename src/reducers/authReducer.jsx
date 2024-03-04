@@ -4,7 +4,6 @@ const initialState = {
     lastName: null,
     token: null,
     error: null, 
-    rememberMe: false
 };
 
 
@@ -33,12 +32,6 @@ const  authReducer = (state = initialState, action) => {
         token: null,
         error: action.payload,
       };
-      case 'SET_REMEMBER_ME':
-        // console.log("New value of rememberMe:", action.payload);
-        return {
-          ...state,
-          rememberMe: action.payload,
-        };
         case 'UPDATE_USER_PROFILE':
       return {
         ...state,

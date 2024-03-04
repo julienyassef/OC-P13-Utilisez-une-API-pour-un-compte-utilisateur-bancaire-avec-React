@@ -1,9 +1,10 @@
 import { setAuthToken, signinSuccess, setRememberMe } from '../store/action/authActions';
 import { login, getUserProfile } from '../utils/apiService';
+import { setLocalStorage } from '../utils/localStorage';
 
 
 export const handleSignIn = async (username, password, rememberMe, dispatch) => {
-  // console.log('Valeur de Remember Me reçue dans handleSignIn :', rememberMe);
+
 
   try {
     // Appel à la fonction de login du ApiService
@@ -18,8 +19,10 @@ export const handleSignIn = async (username, password, rememberMe, dispatch) => 
       const userData = await getUserProfile(token);
 
       if (userData.status === 200) {
-
-        dispatch(setRememberMe(rememberMe));
+        if (rememberMe) {
+          setLocalStorage({token, rememberMe, id:userData.body.id})
+          console.log('toto', setLocalStorage)
+        }
 
         dispatch(setAuthToken(token));
 

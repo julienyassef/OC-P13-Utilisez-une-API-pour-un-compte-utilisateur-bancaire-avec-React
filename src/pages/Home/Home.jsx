@@ -9,6 +9,9 @@ import FeaturesList from '../../components/FeaturesList/FeaturesList';
 import chatIcon from '../../assets/icon-chat.png';
 import moneyIcon from '../../assets/icon-money.png';
 import securityIcon from '../../assets/icon-security.png';
+import { useEffect } from 'react';
+import { getLocalStorage } from '../../utils/localStorage';
+import { useNavigate } from 'react-router-dom';
 
 //DATA
 const features = [
@@ -30,6 +33,17 @@ const features = [
 ];
 
 function Home() {
+
+  const navigate = useNavigate()
+  const {id, rememberMe} = getLocalStorage()
+
+useEffect(()=>{
+  if (rememberMe){
+    navigate(`/user/${id}`)
+
+  }
+}, [])
+
   return (
     <div>
       <Banner/>

@@ -43,5 +43,23 @@ const getUserProfile = async (token) => {
   }
 }
 
+const putUserProfil= async(firstName, lastName, token) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ firstName, lastName }),
+  }
 
-export { fetchData, login, getUserProfile };
+  try {
+    return await fetchData('/profile', requestOptions);
+  } catch (error) {
+    throw new Error(error);
+  }
+
+}
+
+
+export { fetchData, login, getUserProfile, putUserProfil };

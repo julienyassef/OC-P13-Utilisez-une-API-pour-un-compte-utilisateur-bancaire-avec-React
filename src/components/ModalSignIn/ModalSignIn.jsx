@@ -8,28 +8,28 @@ import { useNavigate } from 'react-router';
 
 //Import
 import { handleSignIn } from '../../handle/handleSignIn';
-import { selectUserError, selectUserId, selectRememberMe } from '../../store/selectors/userSelectors';
-import { setRememberMe } from '../../store/action/authActions';
+import { selectUserError, selectUserId} from '../../store/selectors/userSelectors';
+import { getLocalStorage, setLocalStorage } from '../../utils/localStorage';
 
     
 function ModalSignIn() {
 
-
-                                
-  
   const dispatch = useDispatch(); // Permet de dispatcher des actions vers le store Redux.
   const navigate = useNavigate(); // Permet de gérer la navigation entre les pages.
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(''); 
+  const [rememberMe, setRememberMe] = useState(getLocalStorage().rememberMe);
 
-  
+
   const userId = useSelector(selectUserId);
   const userLoginError = useSelector(selectUserError)
-  const userRememberMe = useSelector(selectRememberMe)
-  // console.log("État du rememberMe :", userRememberMe);
 
+  
+  const handleClickRememberMe = (e) => {
+    setRememberMe(e.target.checked)
+    setLocalStorage({rememberMe: e.target.checked})
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,9 +53,6 @@ function ModalSignIn() {
         else if (userLoginError === null) navigate(`/user/${userId}`);
     }, [userId, userLoginError, navigate]);
 
-  //   useEffect(() => {
-  //     console.log('Remember Me after re-mounting modal:', rememberMe);
-  // }, [rememberMe]); 
   
 
   return (
@@ -87,7 +84,7 @@ function ModalSignIn() {
                 type="checkbox"
                 id="remember-me"
                 checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
+                onChange={(e) => {handleClickRememberMe(e)}}
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
