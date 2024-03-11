@@ -1,0 +1,425 @@
+openapi: 3.0.0
+info:
+    title: Argent Bank API - Documentation
+    description: API pour gérer les transactions bancaires de manière sécurisée
+    version: '1.0.0'
+    termsOfService: 'http://swagger.io/terms/'
+servers:
+    - url: http://localhost:3001/api/v1
+paths:
+    /user/login:
+        post:
+            tags:
+                - User Module
+            summary: Login
+            description: API for user login
+            requestBody:
+                description: 'User credentials for login'
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Login'
+            responses:
+                '200':
+                    description: OK - Login Successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LoginResponse'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+    /user/signup:
+        post:
+            tags:
+                - User Module
+            summary: Signup
+            description: API for user signup
+            requestBody:
+                description: 'User details for signup'
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/User'
+            responses:
+                '200':
+                    description: OK - Signup Successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiResponse'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+    /user/profile:
+        post:
+            security:
+                - jwt: []
+            tags:
+                - User Module
+            summary: User Profile API
+            description: API for fetching a user profile
+            responses:
+                '200':
+                    description: OK - User profile retrieved successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiResponse'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+        put:
+            security:
+                - jwt: []
+            tags:
+                - User Module
+            summary: User Profile API
+            description: API for updating a user profile
+            requestBody:
+                description: 'Updated user profile data'
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserProfile'
+            responses:
+                '200':
+                    description: OK - User profile updated successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ApiResponse'
+                '400':
+                    $ref: '#/components/responses/BadRequest'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'
+                    
+                    
+    /user/accounts/{accountId}/transactions:
+        get:
+            security:
+                - jwt: []
+            tags:
+                - User Transactions
+            summary:  Fetch Ongoing Transactions
+            description: API for retrieving all ongoing transactions for a specific account.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  description: The ID of the account
+                  schema:
+                      type: string
+                - in: query
+                  name: status
+                  required: false
+                  description: Filter transactions by status. Use 'ongoing' to fetch ongoing transactions.
+                  schema:
+                    type: string
+                    enum:
+                      - ongoing
+                      - pending
+                      - completed      
+            responses:
+                '200':
+                    description: List of transactions successfully retrieved
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/TransactionSummary'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError' 
+   
+        post:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Add a new transaction
+            description: API for adding a new transaction to a specific account.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account where the transaction will be added.
+            requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/TransactionInput'
+            responses:
+              '201':
+                description: Transaction successfully created.
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Transaction'
+              '400':
+                $ref: '#/components/responses/BadRequest'
+              '401':
+                $ref: '#/components/responses/Unauthorized'
+              '403':
+                $ref: '#/components/responses/Forbidden'
+              '500':
+                $ref: '#/components/responses/InternalServerError'
+                
+        put:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Update a transaction
+            description: API for updating information about an existing transaction.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account associated with the transaction.
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/TransactionInput'
+            responses:
+              '200':
+                description: Transaction updated successfully.
+                content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Transaction'
+              '400':
+                $ref: '#/components/responses/BadRequest'
+              '401':
+                $ref: '#/components/responses/Unauthorized'
+              '403':
+                $ref: '#/components/responses/Forbidden'
+              '404':
+                $ref: '#/components/responses/NotFound'
+              '500':
+                $ref: '#/components/responses/InternalServerError' 
+        delete:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Delete a transaction
+            description: API for deleting an existing transaction.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account associated with the transaction.
+            responses:
+              '204':
+                description: Transaction deleted successfully.
+              '400':
+                $ref: '#/components/responses/BadRequest'
+              '401':
+                $ref: '#/components/responses/Unauthorized'
+              '403':
+                $ref: '#/components/responses/Forbidden'
+              '404':
+                $ref: '#/components/responses/NotFound'
+              '500':
+                $ref: '#/components/responses/InternalServerError'        
+                      
+    /user/accounts/{accountId}/transactions/{transactionId}:
+        get:
+            security:
+                - jwt: []
+            tags:
+               - User Transactions
+            summary: User Transaction API
+            description: API for retrieving a user transaction by ID
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  description: The ID of the account
+                  schema:
+                      type: string
+                - in: path
+                  name: transactionId
+                  required: true
+                  description: The ID of the transaction
+                  schema:
+                      type: string
+            responses:
+                '200':
+                    description: OK - Transaction data successfully retrieved
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Transaction'
+                '401':
+                    $ref: '#/components/responses/Unauthorized'
+                '403':
+                    $ref: '#/components/responses/Forbidden'
+                '404':
+                    $ref: '#/components/responses/NotFound'
+                '500':
+                    $ref: '#/components/responses/InternalServerError'  
+                    
+components:
+    securitySchemes:
+        jwt:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
+    schemas:
+        Login:
+            properties:
+                email:
+                    type: string
+                    description: User email
+                password:
+                    type: string
+                    description: User password 
+        LoginResponse:
+            type: object
+            properties:
+                token:
+                    type: string 
+        User:
+            properties:
+                email:
+                    type: string
+                    description: User email
+                password:
+                    type: string
+                    description: User password
+                firstName:
+                    type: string
+                    description: User first name
+                lastName:
+                    type: string
+                    description: User last name
+        ApiResponse:
+            type: object
+            properties:
+                status:
+                    type: integer
+                message:
+                    type: string
+                body:
+                    type: object
+                    properties:
+                        id:
+                            type: string
+                        email:
+                            type: string 
+        UserProfile:
+            type: object
+            properties:
+                firstName:
+                    type: string
+                lastName:
+                    type: string 
+        
+        TransactionSummary:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the transaction
+              date:
+                type: string
+                format: date-time
+                description: The date and time when the transaction was made
+              amount:
+                type: number
+                format: float
+                description: The amount of the transaction
+              status:
+                type: string
+                description: The status of the transaction (e.g., pending, completed)
+            
+                    
+        Transaction:
+            type: object
+            properties:
+              id:
+                type: string
+                description: Unique identifier for the transaction
+              date:
+                type: string
+                format: date-time
+                description: The date and time when the transaction was made
+              amount:
+                type: number
+                format: float
+                description: The amount of the transaction
+              description:
+                type: string
+                description: A brief description of the transaction
+              status:
+                type: string
+                description: The status of the transaction (e.g., pending, completed)
+              accountName:
+                type: string
+                description: The name of the account associated with the transaction
+                
+        TransactionInput:
+          type: object
+          required:
+            - date
+            - amount
+            - description
+            - status
+          properties:
+            date:
+              type: string
+              format: date-time
+              description: The date and time when the transaction is to be made.
+            amount:
+              type: number
+              format: float
+              description: The amount of the transaction.
+            description:
+              type: string
+              description: A brief description of the transaction.
+            status:
+              type: string
+              description: The intended status of the transaction (e.g., pending, compled).        
+                    
+                    
+                    
+    responses:
+        Unauthorized:
+            description: Unauthorized - Access token is missing or invalid
+        BadRequest:
+            description: Bad Request - Invalid Fields
+        Forbidden:
+            description: Forbidden - User does not have permission to access this resource
+        NotFound:
+            description: Not Found - The requested resource was not found
+        InternalServerError:
+            description: Internal Server Error                
+  
+           
