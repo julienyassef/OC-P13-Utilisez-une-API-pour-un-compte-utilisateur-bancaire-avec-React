@@ -18,6 +18,7 @@ function ModalSignIn() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isError, setIsError] = useState(false)
 
   const userId = useSelector(selectUserId);
   const userLoginError = useSelector(selectUserError)
@@ -29,15 +30,15 @@ function ModalSignIn() {
       const isAuthenticated = await handleSignIn(email, password, dispatch);
       
       if (isAuthenticated) {
-        console.log('Authentification réussie');
+        setIsError(false)
       } else {
-        console.log('Authentification échouée');
+        setIsError(true)
       }
     } catch (error) {
+      setIsError(true)
       console.error('Erreur lors de la soumission du formulaire :', error);
     }
   };
-
 
     useEffect(() => {
         if (userId === null) navigate('/SignIn');
@@ -52,6 +53,7 @@ function ModalSignIn() {
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form>
+          {isError && <p>password or email invalid</p>}
           <div className="signIn-content__inputWrapper">
             <label htmlFor="username">Username</label>
             <input
