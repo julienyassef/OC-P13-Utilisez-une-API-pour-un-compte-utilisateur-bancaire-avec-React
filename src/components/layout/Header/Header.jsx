@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 //Import
 import {selectUserFirstName, selectUserId, selectUserIsConnected} from '../../../store/selectors/userSelectors'
+import { signOut } from '../../../store/action/authActions';
 
 function Header() {
   const firstName = useSelector(selectUserFirstName);
@@ -19,7 +20,7 @@ function Header() {
 
   const handleLogout = () => {
     const dispatch = useDispatch();
-    dispatch(signOut()); 
+    dispatch(signOut());
   };
 
 

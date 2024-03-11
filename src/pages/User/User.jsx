@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import AccountList from '../../components/AccountList/AccountList';
 import { selectUserIsConnected, selectUserFirstName, selectUserLastName} from '../../store/selectors/userSelectors';
-import { getLocalStorage } from '../../utils/localStorage';
 
 
 
@@ -40,14 +39,11 @@ function User() {
    const lastName = useSelector(selectUserLastName)
    const navigate = useNavigate();
  
-   // Rediriger vers la page d'accueil si aucun token n'est présent
-   const {id,rememberMe} = getLocalStorage()
+
 
    useEffect(() => {
-     if (!isConnected && !rememberMe) { 
+     if (!isConnected) { 
        navigate('/');
-     } else {
-      navigate(`/user/${id}`)
      }
    }, [isConnected, navigate]);
 

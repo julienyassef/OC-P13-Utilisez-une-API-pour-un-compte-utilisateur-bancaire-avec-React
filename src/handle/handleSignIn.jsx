@@ -1,29 +1,20 @@
-import { setAuthToken, signinSuccess, setRememberMe } from '../store/action/authActions';
+import { setAuthToken, signinSuccess } from '../store/action/authActions';
 import { login, getUserProfile } from '../utils/apiService';
-import { setLocalStorage } from '../utils/localStorage';
 
 
-export const handleSignIn = async (username, password, rememberMe, dispatch) => {
-
-
+export const handleSignIn = async (username, password, dispatch) => {
   try {
     // Appel à la fonction de login du ApiService
     const loginResponse = await login(username, password);
 
     if (loginResponse.status === 200) {
 
-      
       const token = loginResponse.body.token;
    
       // Récupérer les informations utilisateur avec le token
       const userData = await getUserProfile(token);
 
       if (userData.status === 200) {
-        if (rememberMe) {
-          setLocalStorage({token, rememberMe, id:userData.body.id})
-          console.log('toto', setLocalStorage)
-        }
-
         dispatch(setAuthToken(token));
 
         // Dispatch une action pour mettre à jour le state avec les informations de l'utilisateur

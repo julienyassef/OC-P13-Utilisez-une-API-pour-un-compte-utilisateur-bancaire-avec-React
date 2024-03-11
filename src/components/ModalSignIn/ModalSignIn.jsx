@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router';
 //Import
 import { handleSignIn } from '../../handle/handleSignIn';
 import { selectUserError, selectUserId} from '../../store/selectors/userSelectors';
-import { getLocalStorage, setLocalStorage } from '../../utils/localStorage';
 
     
 function ModalSignIn() {
@@ -19,23 +18,15 @@ function ModalSignIn() {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(getLocalStorage().rememberMe);
-
 
   const userId = useSelector(selectUserId);
   const userLoginError = useSelector(selectUserError)
-
-  
-  const handleClickRememberMe = (e) => {
-    setRememberMe(e.target.checked)
-    setLocalStorage({rememberMe: e.target.checked})
-  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      const isAuthenticated = await handleSignIn(email, password, rememberMe, dispatch);
+      const isAuthenticated = await handleSignIn(email, password, dispatch);
       
       if (isAuthenticated) {
         console.log('Authentification réussie');
@@ -83,8 +74,7 @@ function ModalSignIn() {
             <input
                 type="checkbox"
                 id="remember-me"
-                checked={rememberMe}
-                onChange={(e) => {handleClickRememberMe(e)}}
+        
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>

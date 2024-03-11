@@ -9,10 +9,7 @@ import FeaturesList from '../../components/FeaturesList/FeaturesList';
 import chatIcon from '../../assets/icon-chat.png';
 import moneyIcon from '../../assets/icon-money.png';
 import securityIcon from '../../assets/icon-security.png';
-import { useEffect } from 'react';
-import { getLocalStorage } from '../../utils/localStorage';
-import { useNavigate } from 'react-router-dom';
-import { getUserProfile } from '../../utils/apiService';
+
 
 //DATA
 const features = [
@@ -34,29 +31,6 @@ const features = [
 ];
 
 function Home() {
-
-  const navigate = useNavigate()
-  const {id, rememberMe, token} = getLocalStorage()
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (rememberMe && token) {
-        try {
-          const userProfile = await getUserProfile(token);
-          console.log('User Profile:', userProfile);
-        } catch (error) {
-          console.error('Error fetching user profile:', error);
-         
-        }
-      }
-    };
-
-    if (rememberMe) {
-      fetchUserProfile();
-      navigate(`/user/${id}`);
-    }
-  }, [navigate, id, rememberMe, token]);
-
 
   return (
     <div>

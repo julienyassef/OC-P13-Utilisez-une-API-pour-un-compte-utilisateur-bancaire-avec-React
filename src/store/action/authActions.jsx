@@ -30,11 +30,6 @@ export const signOut = () => ({
   type: 'SIGN_OUT',
 });
 
-export const setRememberMe = (rememberMe) => ({
-  type: 'SET_REMEMBER_ME',
-  payload: rememberMe,
-});
-
 export const updateUserProfile = (firstName, lastName) => ({
   type: 'UPDATE_USER_PROFILE',
   payload: { firstName, lastName },
