@@ -53,7 +53,7 @@ function ModalSignIn() {
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form>
-          {isError && <p>password or email invalid</p>}
+          {isError && <p className='errorMessage'>password or email invalid</p>}
           <div className="signIn-content__inputWrapper">
             <label htmlFor="username">Username</label>
             <input
@@ -76,15 +76,11 @@ function ModalSignIn() {
             <input
                 type="checkbox"
                 id="remember-me"
-        
             />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className="signIn-content__buttonSignIn" onClick={handleSubmit}>Sign In</button>
         </form>
-        
-        {/* <p className="">userLoginError</p> */}
-       
       </section>
     </div>
   );
