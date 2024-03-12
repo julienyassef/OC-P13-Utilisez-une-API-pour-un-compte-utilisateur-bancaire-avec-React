@@ -147,107 +147,8 @@ paths:
                     $ref: '#/components/responses/NotFound'
                 '500':
                     $ref: '#/components/responses/InternalServerError' 
-   
-        post:
-            security:
-                - jwt: []
-            tags:
-                - Transaction Management
-            summary: Add a new transaction
-            description: API for adding a new transaction to a specific account.
-            parameters:
-                - in: path
-                  name: accountId
-                  required: true
-                  schema:
-                    type: string
-                  description: The ID of the account where the transaction will be added.
-            requestBody:
-                required: true
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/TransactionInput'
-            responses:
-              '201':
-                description: Transaction successfully created.
-                content:
-                  application/json:
-                    schema:
-                      $ref: '#/components/schemas/Transaction'
-              '400':
-                $ref: '#/components/responses/BadRequest'
-              '401':
-                $ref: '#/components/responses/Unauthorized'
-              '403':
-                $ref: '#/components/responses/Forbidden'
-              '500':
-                $ref: '#/components/responses/InternalServerError'
-                
-        put:
-            security:
-                - jwt: []
-            tags:
-                - Transaction Management
-            summary: Update a transaction
-            description: API for updating information about an existing transaction.
-            parameters:
-                - in: path
-                  name: accountId
-                  required: true
-                  schema:
-                    type: string
-                  description: The ID of the account associated with the transaction.
-            requestBody:
-              required: true
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/TransactionInput'
-            responses:
-              '200':
-                description: Transaction updated successfully.
-                content:
-                    application/json:
-                      schema:
-                        $ref: '#/components/schemas/Transaction'
-              '400':
-                $ref: '#/components/responses/BadRequest'
-              '401':
-                $ref: '#/components/responses/Unauthorized'
-              '403':
-                $ref: '#/components/responses/Forbidden'
-              '404':
-                $ref: '#/components/responses/NotFound'
-              '500':
-                $ref: '#/components/responses/InternalServerError' 
-        delete:
-            security:
-                - jwt: []
-            tags:
-                - Transaction Management
-            summary: Delete a transaction
-            description: API for deleting an existing transaction.
-            parameters:
-                - in: path
-                  name: accountId
-                  required: true
-                  schema:
-                    type: string
-                  description: The ID of the account associated with the transaction.
-            responses:
-              '204':
-                description: Transaction deleted successfully.
-              '400':
-                $ref: '#/components/responses/BadRequest'
-              '401':
-                $ref: '#/components/responses/Unauthorized'
-              '403':
-                $ref: '#/components/responses/Forbidden'
-              '404':
-                $ref: '#/components/responses/NotFound'
-              '500':
-                $ref: '#/components/responses/InternalServerError'        
+
+               
                       
     /user/accounts/{accountId}/transactions/{transactionId}:
         get:
@@ -285,6 +186,128 @@ paths:
                     $ref: '#/components/responses/NotFound'
                 '500':
                     $ref: '#/components/responses/InternalServerError'  
+        post:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Add information to a transaction
+            description: API to add new information to a specific transaction.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account where the transaction is located.
+                - in: path
+                  name: transactionId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the transaction to modify.
+            requestBody:
+                required: true
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/TransactionInput'
+            responses:
+                '201':
+                    description: Transaction successfully created.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Transaction'
+                '400':
+                  $ref: '#/components/responses/BadRequest'
+                '401':
+                  $ref: '#/components/responses/Unauthorized'
+                '403':
+                  $ref: '#/components/responses/Forbidden'
+                '500':
+                  $ref: '#/components/responses/InternalServerError'
+                
+        put:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Update transaction information
+            description: API to update information about a specific transaction.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account associated with the transaction.
+                - in: path
+                  name: transactionId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the transaction to modify.
+            requestBody:
+              required: true
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/TransactionInput'
+            responses:
+              '200':
+                description: Transaction updated successfully.
+                content:
+                    application/json:
+                      schema:
+                        $ref: '#/components/schemas/Transaction'
+              '400':
+                $ref: '#/components/responses/BadRequest'
+              '401':
+                $ref: '#/components/responses/Unauthorized'
+              '403':
+                $ref: '#/components/responses/Forbidden'
+              '404':
+                $ref: '#/components/responses/NotFound'
+              '500':
+                $ref: '#/components/responses/InternalServerError' 
+        delete:
+            security:
+                - jwt: []
+            tags:
+                - Transaction Management
+            summary: Remove transaction information
+            description: API to remove specific information from a transaction.
+            parameters:
+                - in: path
+                  name: accountId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the account associated with the transaction.
+                - in: path
+                  name: transactionId
+                  required: true
+                  schema:
+                    type: string
+                  description: The ID of the transaction from which to remove information
+            responses:
+              '200':
+                description: Transaction information removed successfully.
+                content:
+                  application/json:
+                    schema:
+                      $ref: '#/components/schemas/Transaction'
+              '400':
+                $ref: '#/components/responses/BadRequest'
+              '401':
+                $ref: '#/components/responses/Unauthorized'
+              '403':
+                $ref: '#/components/responses/Forbidden'
+              '404':
+                $ref: '#/components/responses/NotFound'
+              '500':
+                $ref: '#/components/responses/InternalServerError'             
                     
 components:
     securitySchemes:
@@ -340,8 +363,8 @@ components:
                 firstName:
                     type: string
                 lastName:
-                    type: string 
-        
+                    type: string
+
         TransactionSummary:
             type: object
             properties:
