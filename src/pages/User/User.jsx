@@ -43,7 +43,7 @@ function User() {
 
    useEffect(() => {
      if (!isConnected) { 
-       navigate('/');
+       navigate('/SignIn');
      }
    }, [isConnected, navigate]);
 
