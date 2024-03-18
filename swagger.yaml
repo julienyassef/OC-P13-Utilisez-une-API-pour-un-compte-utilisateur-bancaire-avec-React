@@ -375,10 +375,6 @@ components:
                 type: string
                 format: date-time
                 description: The date and time when the transaction was made
-              amount:
-                type: number
-                format: float
-                description: The amount of the transaction
               status:
                 type: string
                 description: The status of the transaction (e.g., pending, completed)
@@ -394,10 +390,6 @@ components:
                 type: string
                 format: date-time
                 description: The date and time when the transaction was made
-              amount:
-                type: number
-                format: float
-                description: The amount of the transaction
               description:
                 type: string
                 description: A brief description of the transaction
